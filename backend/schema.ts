@@ -1,5 +1,6 @@
 import { list } from "@keystone-6/core";
-import { password, text } from "@keystone-6/core/fields";
+import { password, relationship, text } from "@keystone-6/core/fields";
+import { document } from "@keystone-6/fields-document";
 
 export const lists = {
   User: list({
@@ -14,7 +15,24 @@ export const lists = {
     fields: {
       title: text({ validation: { isRequired: true } }),
       slug: text({ isIndexed: "unique", isFilterable: true }),
-      content: text(),
+      content: document({
+        formatting: true,
+        dividers: true,
+        links: true,
+        layouts: [
+          [1, 1],
+          [1, 1, 1],
+        ],
+      }),
+      author: relationship({ ref: "User", many: false }),
+    },
+  }),
+  Project: list({
+    fields: {
+      name: text({ validation: { isRequired: true } }),
+      description: text({ validation: { isRequired: true } }),
+      siteUrl: text(),
+      codeUrl: text(),
     },
   }),
 };

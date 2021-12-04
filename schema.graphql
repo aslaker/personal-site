@@ -102,7 +102,12 @@ type Post {
   id: ID!
   title: String
   slug: String
-  content: String
+  content: Post_content_Document
+  author: User
+}
+
+type Post_content_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 input PostWhereUniqueInput {
@@ -117,20 +122,26 @@ input PostWhereInput {
   id: IDFilter
   title: StringFilter
   slug: StringFilter
-  content: StringFilter
+  author: UserWhereInput
 }
 
 input PostOrderByInput {
   id: OrderDirection
   title: OrderDirection
   slug: OrderDirection
-  content: OrderDirection
 }
 
 input PostUpdateInput {
   title: String
   slug: String
-  content: String
+  content: JSON
+  author: UserRelateToOneForUpdateInput
+}
+
+input UserRelateToOneForUpdateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
 }
 
 input PostUpdateArgs {
@@ -141,7 +152,63 @@ input PostUpdateArgs {
 input PostCreateInput {
   title: String
   slug: String
-  content: String
+  content: JSON
+  author: UserRelateToOneForCreateInput
+}
+
+input UserRelateToOneForCreateInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+type Project {
+  id: ID!
+  name: String
+  description: String
+  siteUrl: String
+  codeUrl: String
+}
+
+input ProjectWhereUniqueInput {
+  id: ID
+}
+
+input ProjectWhereInput {
+  AND: [ProjectWhereInput!]
+  OR: [ProjectWhereInput!]
+  NOT: [ProjectWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  description: StringFilter
+  siteUrl: StringFilter
+  codeUrl: StringFilter
+}
+
+input ProjectOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+  siteUrl: OrderDirection
+  codeUrl: OrderDirection
+}
+
+input ProjectUpdateInput {
+  name: String
+  description: String
+  siteUrl: String
+  codeUrl: String
+}
+
+input ProjectUpdateArgs {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateInput!
+}
+
+input ProjectCreateInput {
+  name: String
+  description: String
+  siteUrl: String
+  codeUrl: String
 }
 
 """
@@ -165,6 +232,15 @@ type Mutation {
   updatePosts(data: [PostUpdateArgs!]!): [Post]
   deletePost(where: PostWhereUniqueInput!): Post
   deletePosts(where: [PostWhereUniqueInput!]!): [Post]
+  createProject(data: ProjectCreateInput!): Project
+  createProjects(data: [ProjectCreateInput!]!): [Project]
+  updateProject(
+    where: ProjectWhereUniqueInput!
+    data: ProjectUpdateInput!
+  ): Project
+  updateProjects(data: [ProjectUpdateArgs!]!): [Project]
+  deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteProjects(where: [ProjectWhereUniqueInput!]!): [Project]
   endSession: Boolean!
   authenticateUserWithPassword(
     email: String!
@@ -212,6 +288,14 @@ type Query {
   ): [Post!]
   post(where: PostWhereUniqueInput!): Post
   postsCount(where: PostWhereInput! = {}): Int
+  projects(
+    where: ProjectWhereInput! = {}
+    orderBy: [ProjectOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Project!]
+  project(where: ProjectWhereUniqueInput!): Project
+  projectsCount(where: ProjectWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }
