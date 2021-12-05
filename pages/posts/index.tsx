@@ -1,7 +1,31 @@
-import React from "react";
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import Link from "next/link";
-import { fetchGraphQL, gql } from "../../utils";
+
+// Import the generated Lists API from Keystone
+import { query } from ".keystone/api";
+
+// Home receives a `posts` prop from `getStaticProps` below
+export default function Home({
+  posts,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <div>
+      <main style={{ margin: "3rem" }}>
+        <h1>Hello World! 👋🏻 </h1>
+        <ul>
+          {/* Render each post with a link to the content page */}
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Link href={`/posts/${post.slug}`}>
+                <a>{post.title}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </main>
+    </div>
+  );
+}
 
 type Post = {
   id: string;
@@ -9,33 +33,9 @@ type Post = {
   slug: string;
 };
 
-const PostsPage = ({ posts }: { posts: Post[] }) => {
-  return (
-    <ul>
-      {posts.map((post) => (
-        <li key={post.id}>
-          <Link href={`/posts/${post.slug}`} as={`/posts/${post.slug}`}>
-            <a>{post.title}</a>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-export default PostsPage;
-
-export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const data = await fetchGraphQL(
-    gql`
-      query {
-        posts {
-          id
-          title
-          slug
-        }
-      }
-    `
-  );
-  return { props: { posts: data.posts }, revalidate: 60 };
+// Here we use the Lists API to load all the posts we want to display
+// The return of this function is provided to the `Home` component
+export async function getStaticProps() {
+  const posts: Post[] = await query.Post.findMany({ query: "id title slug" });
+  return { props: { posts } };
 }
