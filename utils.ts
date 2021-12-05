@@ -1,10 +1,11 @@
 export const gql = ([content]: TemplateStringsArray) => content;
+require("dotenv").config();
 
 export async function fetchGraphQL(
   query: string,
   variables?: Record<string, any>
 ) {
-  return fetch("http://localhost:1234/api/graphql", {
+  return fetch(`${process.env.HOST_BASE_URL}/api/graphql`, {
     method: "POST",
     body: JSON.stringify({ query, variables }),
     headers: { "Content-Type": "application/json" },
