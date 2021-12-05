@@ -4,7 +4,7 @@ import { config } from "@keystone-6/core";
 import { createAuth } from "@keystone-6/auth";
 import { statelessSessions } from "@keystone-6/core/session";
 import { lists } from "./schema/schema";
-import dotEnvLoad from 'dotenv-load';
+import dotEnvLoad from "dotenv-load";
 
 dotEnvLoad();
 
@@ -16,7 +16,7 @@ const { withAuth } = createAuth({
 });
 
 const session = statelessSessions({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SESSION_SECRET as string,
 });
 
 export default withAuth(
