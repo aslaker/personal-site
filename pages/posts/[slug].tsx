@@ -37,11 +37,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const paths = posts
     .map((post) => post.slug)
     .filter((slug): slug is string => !!slug)
-    .map((slug) => ({
-      params: {
-        slug,
-      },
-    }));
+    .map((slug) => `/posts/${slug}`);
 
   return {
     paths,
