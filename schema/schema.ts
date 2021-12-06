@@ -35,4 +35,11 @@ export const lists = {
       codeUrl: text(),
     },
   }),
+  Page: list({
+    fields: {
+      name: text({ isIndexed: "unique", validation: { isRequired: true } }),
+      headerText: text(),
+      aboutText: text(),
+    },
+  }),
 };

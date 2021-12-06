@@ -38,3 +38,10 @@ model Project {
   siteUrl     String @default("")
   codeUrl     String @default("")
 }
+
+model Page {
+  id         String @id @default(cuid())
+  name       String @unique @default("")
+  headerText String @default("")
+  aboutText  String @default("")
+}
