@@ -1,16 +1,27 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@import url("/fonts/stylesheet.css");
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  box-sizing: border-box;
+@layer base {
+  @font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url("/fonts/Roboto-Regular.woff") format("woff");
+  }
+  @font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    src: url("/fonts/Roboto-Medium.woff") format("woff");
+  }
+  html {
+    @apply h-full w-full;
+  }
+  body {
+    @apply h-full w-full;
+  }
+  #__next {
+    @apply h-full w-full;
+  }
 }
