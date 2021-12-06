@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div className=" flex flex-col p-10 justify-center gap-12 items-end h-full w-full bg-gray-900">
+    <div className=" flex flex-col p-10 justify-center gap-12 items-end min-h-screen bg-gray-900">
       <h1 className="text-white font-sans text-3xl">
         Hi my name is <span className="text-primary-400">Adam Slaker</span>,
         come see some of the cool stuff I have built
