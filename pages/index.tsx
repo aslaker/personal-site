@@ -19,7 +19,7 @@ const Home: NextPage<Page> = ({ headerText, aboutText }) => {
         <p className="text-xl">I like to develop software.</p>
       </div>
       <Link href="/projects">
-        <a className="flex justify-center items-center bg-green-400 rounded-md w-24 h-12 font-bold text-white">
+        <a className="flex justify-center items-center bg-primary-400 rounded-md w-24 h-12 font-bold text-white">
           Enter
         </a>
       </Link>
