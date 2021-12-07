@@ -12,7 +12,7 @@ const { withAuth } = createAuth({
   listKey: "User",
   identityField: "email",
   secretField: "password",
-  initFirstItem: { fields: ["firstName", "lastName", "email", "password"] },
+  initFirstItem: { fields: ["email", "password"] },
 });
 
 const session = statelessSessions({

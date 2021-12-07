@@ -1,5 +1,5 @@
 import { list } from "@keystone-6/core";
-import { password, relationship, text } from "@keystone-6/core/fields";
+import { password, relationship, text, virtual } from "@keystone-6/core/fields";
 import { document } from "@keystone-6/fields-document";
 
 export const lists = {
@@ -7,8 +7,10 @@ export const lists = {
     fields: {
       firstName: text({ validation: { isRequired: true } }),
       lastName: text({ validation: { isRequired: true } }),
+      name: text({ validation: { isRequired: true } }),
       email: text({ isIndexed: "unique", validation: { isRequired: true } }),
       password: password({ validation: { isRequired: true } }),
+      posts: relationship({ ref: "Post.author", many: true }),
     },
   }),
   Post: list({
@@ -24,7 +26,7 @@ export const lists = {
           [1, 1, 1],
         ],
       }),
-      author: relationship({ ref: "User", many: false }),
+      author: relationship({ ref: "User.posts", many: false }),
     },
   }),
   Project: list({
