@@ -2,13 +2,15 @@ import {
   GetStaticPathsResult,
   GetStaticPropsContext,
   InferGetStaticPropsType,
+  NextPage,
 } from "next";
 import Link from "next/link";
 import { query } from ".keystone/api";
+import { Post } from "../../types/data.types";
 
-export default function PostPage({
+const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   post,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}) => {
   return (
     <div>
       <main style={{ margin: "3rem" }}>
@@ -21,13 +23,9 @@ export default function PostPage({
       </main>
     </div>
   );
-}
-
-type Post = {
-  id: string;
-  title: string;
-  slug: string;
 };
+
+export default PostPage;
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const posts: Post[] = await query.Post.findMany({

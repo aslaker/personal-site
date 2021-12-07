@@ -3,7 +3,7 @@
 import { config } from "@keystone-6/core";
 import { createAuth } from "@keystone-6/auth";
 import { statelessSessions } from "@keystone-6/core/session";
-import { lists } from "./schema/schema";
+import { lists } from "./src/schema/schema";
 import dotEnvLoad from "dotenv-load";
 
 dotEnvLoad();

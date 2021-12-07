@@ -1,0 +1,33 @@
+@import url("/fonts/stylesheet.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url("/fonts/Roboto-Regular.woff") format("woff");
+  }
+  @font-face {
+    font-family: Roboto;
+    font-weight: 500;
+    src: url("/fonts/Roboto-Medium.woff") format("woff");
+  }
+  html {
+    @apply h-full w-full;
+  }
+  body {
+    @apply h-full w-full;
+  }
+  #__next {
+    @apply h-full w-full;
+  }
+}
+
+@layer components {
+  .navbar {
+    @apply flex flex-col items-stretch gap-10 w-40 p-5 bg-secondary-900 text-white absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out;
+  }
+}
