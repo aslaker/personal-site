@@ -1,14 +1,20 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
+import type {
+  InferGetStaticPropsType,
+  NextLayoutComponentType,
+  NextPage,
+} from "next";
 import Link from "next/link";
 
 // Import the generated Lists API from Keystone
 import { query } from ".keystone/api";
 import { Post } from "../../types/data.types";
+import { ReactNode } from "react";
+import MainLayout from "../../layouts/MainLayout";
 
 // Home receives a `posts` prop from `getStaticProps` below
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  posts,
-}) => {
+const Blog: NextLayoutComponentType<
+  InferGetStaticPropsType<typeof getStaticProps>
+> = ({ posts }) => {
   return (
     <div>
       <main style={{ margin: "3rem" }}>
@@ -28,7 +34,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   );
 };
 
-export default Home;
+export default Blog;
+
+Blog.getLayout = function getLayout(page: ReactNode) {
+  return <MainLayout>{page}</MainLayout>;
+};
 
 // Here we use the Lists API to load all the posts we want to display
 // The return of this function is provided to the `Home` component
