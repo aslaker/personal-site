@@ -1,13 +1,14 @@
-import type { InferGetStaticPropsType } from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 import Link from "next/link";
 
 // Import the generated Lists API from Keystone
 import { query } from ".keystone/api";
+import { Post } from "../../types/data.types";
 
 // Home receives a `posts` prop from `getStaticProps` below
-export default function Home({
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   posts,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}) => {
   return (
     <div>
       <main style={{ margin: "3rem" }}>
@@ -25,13 +26,9 @@ export default function Home({
       </main>
     </div>
   );
-}
-
-type Post = {
-  id: string;
-  title: string;
-  slug: string;
 };
+
+export default Home;
 
 // Here we use the Lists API to load all the posts we want to display
 // The return of this function is provided to the `Home` component

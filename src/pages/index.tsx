@@ -1,16 +1,17 @@
-import type { GetStaticPropsResult, NextPage } from "next";
+import type {
+  GetStaticPropsResult,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next";
 import Link from "next/link";
 import { query } from ".keystone/api";
-import type { InferGetStaticPropsType } from "next";
 
-type Page = {
-  headerText: string;
-  aboutText: string;
-};
-
-const Home: NextPage<Page> = ({ headerText, aboutText }) => {
+const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  headerText,
+  aboutText,
+}) => {
   return (
-    <div className=" flex flex-col p-10 justify-center items-end gap-12 min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col p-10 justify-center items-end gap-12 min-h-screen bg-gray-900 text-white">
       <div className="flex flex-col items-end">
         <h1 className="font-sans text-2xl">
           Hi my name is{" "}

@@ -1,13 +1,13 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { query } from ".keystone/api";
-import { NextPage } from "next";
+import { NextLayoutComponentType } from "next";
 import type { InferGetStaticPropsType } from "next";
 import { Page, Project } from "../../types/data.types";
+import MainLayout from "../../layouts/MainLayout";
 
-const ProjectsPage = ({
-  page,
-  projects,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const ProjectsPage: NextLayoutComponentType<
+  InferGetStaticPropsType<typeof getStaticProps>
+> = ({ page, projects }) => {
   return (
     <div>
       <h1>{page.headerText}</h1>
@@ -23,6 +23,10 @@ const ProjectsPage = ({
 };
 
 export default ProjectsPage;
+
+ProjectsPage.getLayout = function getLayout(page: ReactNode) {
+  return <MainLayout>{page}</MainLayout>;
+};
 
 export async function getStaticProps() {
   const page: Page = await query.Page.findOne({
