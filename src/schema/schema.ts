@@ -5,8 +5,6 @@ import { document } from "@keystone-6/fields-document";
 export const lists = {
   User: list({
     fields: {
-      firstName: text({ validation: { isRequired: true } }),
-      lastName: text({ validation: { isRequired: true } }),
       name: text({ validation: { isRequired: true } }),
       email: text({ isIndexed: "unique", validation: { isRequired: true } }),
       password: password({ validation: { isRequired: true } }),
@@ -32,7 +30,12 @@ export const lists = {
   Project: list({
     fields: {
       name: text({ validation: { isRequired: true } }),
-      description: text({ validation: { isRequired: true } }),
+      description: text({
+        validation: { isRequired: true },
+        ui: {
+          displayMode: "textarea",
+        },
+      }),
       siteUrl: text(),
       codeUrl: text(),
     },
