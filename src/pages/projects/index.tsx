@@ -4,6 +4,8 @@ import { NextLayoutComponentType } from "next";
 import type { InferGetStaticPropsType } from "next";
 import { Page, Project } from "../../types/data.types";
 import MainLayout from "../../layouts/MainLayout";
+import { AiFillGithub } from "react-icons/ai";
+import { IconContext } from "react-icons/lib";
 
 const ProjectsPage: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
@@ -14,13 +16,18 @@ const ProjectsPage: NextLayoutComponentType<
       <ul className="flex flex-col h-screen w-full space-y-4 overflow-y-scroll">
         {projects.map((project) => (
           <li
-            className="flex flex-col h-48 rounded-md bg-gray-100  shadow-lg"
+            className="flex flex-col h-64 rounded-md bg-gray-100  shadow-lg"
             key={project.id}
           >
-            <div className="flex-auto rounded-t-md p-2 bg-primary-400">
+            <div className="flex justify-between items-center rounded-t-md p-2 bg-primary-400">
               <span className="text-lg font-bold">{project.name}</span>
+              <a href={project.codeUrl} target="_blank" rel="noreferrer">
+                <IconContext.Provider value={{ size: "30px" }}>
+                  <AiFillGithub />
+                </IconContext.Provider>
+              </a>
             </div>
-            <div className="flex-auto max-h-full h-full rounded-md p-2">
+            <div className="max-h-full h-full rounded-md p-2">
               <p className="truncate">{project.description}</p>
             </div>
           </li>
