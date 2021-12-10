@@ -8,6 +8,7 @@ export type Page = {
 export type Project = {
   id: string;
   name: string;
+  shortDescription: string;
   description?: string;
   siteUrl?: string;
   codeUrl?: string;

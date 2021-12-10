@@ -187,6 +187,7 @@ input UserRelateToOneForCreateInput {
 type Project {
   id: ID!
   name: String
+  shortDescription: String
   description: String
   siteUrl: String
   codeUrl: String
@@ -202,6 +203,7 @@ input ProjectWhereInput {
   NOT: [ProjectWhereInput!]
   id: IDFilter
   name: StringFilter
+  shortDescription: StringFilter
   description: StringFilter
   siteUrl: StringFilter
   codeUrl: StringFilter
@@ -210,6 +212,7 @@ input ProjectWhereInput {
 input ProjectOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  shortDescription: OrderDirection
   description: OrderDirection
   siteUrl: OrderDirection
   codeUrl: OrderDirection
@@ -217,6 +220,7 @@ input ProjectOrderByInput {
 
 input ProjectUpdateInput {
   name: String
+  shortDescription: String
   description: String
   siteUrl: String
   codeUrl: String
@@ -229,6 +233,7 @@ input ProjectUpdateArgs {
 
 input ProjectCreateInput {
   name: String
+  shortDescription: String
   description: String
   siteUrl: String
   codeUrl: String

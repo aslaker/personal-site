@@ -1,5 +1,9 @@
 import { list } from "@keystone-6/core";
-import { password, relationship, text, virtual } from "@keystone-6/core/fields";
+import {
+  password,
+  relationship,
+  text,
+} from "@keystone-6/core/fields";
 import { document } from "@keystone-6/fields-document";
 
 export const lists = {
@@ -30,12 +34,30 @@ export const lists = {
   Project: list({
     fields: {
       name: text({ validation: { isRequired: true } }),
+      shortDescription: text({
+        validation: { length: { max: 140 } },
+        ui: {
+          displayMode: "textarea",
+        },
+      }),
       description: text({
         validation: { isRequired: true },
         ui: {
           displayMode: "textarea",
         },
       }),
+      // TODO: #3 Create custom multi-select field
+      // technologies: select({
+      //   type: "enum",
+      //   options: [
+      //     { label: "GraphQL", value: "GRAPHQL" },
+      //     { label: "React", value: "REACT" },
+      //     { label: "NextJS", value: "NEXTJS" },
+      //   ],
+      //   ui: {
+      //     displayMode: "select",
+      //   },
+      // }),
       siteUrl: text(),
       codeUrl: text(),
     },

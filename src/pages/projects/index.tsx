@@ -7,6 +7,10 @@ import MainLayout from "../../layouts/MainLayout";
 import { AiFillGithub } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
 
+//TODO: #4 Add technology icons based on selections from custom multi-select
+//BUG: #5 Fix scrolling on the page
+//TODO: #6 Update styles to accomodate for desktop
+//TODO: #7 Test styles on mobile
 const ProjectsPage: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page, projects }) => {
@@ -28,7 +32,7 @@ const ProjectsPage: NextLayoutComponentType<
               </a>
             </div>
             <div className="max-h-full h-full rounded-md p-2">
-              <p className="truncate">{project.description}</p>
+              <p className="text-xs">{project.shortDescription}</p>
             </div>
           </li>
         ))}
@@ -49,7 +53,7 @@ export async function getStaticProps() {
     query: "name headerText",
   });
   const projects: Project[] = await query.Project.findMany({
-    query: "id name description siteUrl, codeUrl",
+    query: "id name description siteUrl, codeUrl shortDescription",
   });
   return {
     props: { page, projects },
