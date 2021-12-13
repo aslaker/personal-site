@@ -9,9 +9,9 @@ import { IconContext } from "react-icons/lib";
 import Head from "next/head";
 
 //TODO: #4 Add technology icons based on selections from custom multi-select
-//BUG: #5 Fix scrolling on the page
 //TODO: #6 Update styles to accomodate for desktop
 //TODO: #7 Test styles on mobile
+//TODO: #10 Stop menu from disappearing after click on desktop
 const ProjectsPage: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page, projects }) => {
