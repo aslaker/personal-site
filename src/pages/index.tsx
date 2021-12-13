@@ -22,7 +22,9 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             Hi my name is{" "}
             <span className="text-primary-400 font-bold">Adam Slaker</span>
           </h1>
-          <p className="font-sans text-xl">I like to develop software.</p>
+          <span className="font-sans text-lg md:text-xl">
+            I like to develop software.
+          </span>
         </div>
         <Link href="/projects">
           <a className="flex justify-center items-center bg-primary-400 rounded-md w-24 h-12 font-bold text-white">
