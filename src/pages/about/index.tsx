@@ -3,12 +3,16 @@ import MainLayout from "../../layouts/MainLayout";
 import { query } from ".keystone/api";
 import type { Page } from "../../types/data.types";
 import { InferGetStaticPropsType, NextLayoutComponentType } from "next";
+import Head from "next/head";
 
 const AboutPage: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page }) => {
   return (
     <>
+      <Head>
+        <title>{page.headerText}</title>
+      </Head>
       <h1>{page.headerText}</h1>
       <p>{page.aboutText}</p>
     </>
