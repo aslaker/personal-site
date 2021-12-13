@@ -3,8 +3,6 @@
 
 type User {
   id: ID!
-  firstName: String
-  lastName: String
   name: String
   email: String
   password: PasswordState
@@ -31,8 +29,6 @@ input UserWhereInput {
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
   id: IDFilter
-  firstName: StringFilter
-  lastName: StringFilter
   name: StringFilter
   email: StringFilter
   posts: PostManyRelationFilter
@@ -85,8 +81,6 @@ input PostManyRelationFilter {
 
 input UserOrderByInput {
   id: OrderDirection
-  firstName: OrderDirection
-  lastName: OrderDirection
   name: OrderDirection
   email: OrderDirection
 }
@@ -97,8 +91,6 @@ enum OrderDirection {
 }
 
 input UserUpdateInput {
-  firstName: String
-  lastName: String
   name: String
   email: String
   password: String
@@ -118,8 +110,6 @@ input UserUpdateArgs {
 }
 
 input UserCreateInput {
-  firstName: String
-  lastName: String
   name: String
   email: String
   password: String
@@ -197,6 +187,7 @@ input UserRelateToOneForCreateInput {
 type Project {
   id: ID!
   name: String
+  shortDescription: String
   description: String
   siteUrl: String
   codeUrl: String
@@ -212,6 +203,7 @@ input ProjectWhereInput {
   NOT: [ProjectWhereInput!]
   id: IDFilter
   name: StringFilter
+  shortDescription: StringFilter
   description: StringFilter
   siteUrl: StringFilter
   codeUrl: StringFilter
@@ -220,6 +212,7 @@ input ProjectWhereInput {
 input ProjectOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  shortDescription: OrderDirection
   description: OrderDirection
   siteUrl: OrderDirection
   codeUrl: OrderDirection
@@ -227,6 +220,7 @@ input ProjectOrderByInput {
 
 input ProjectUpdateInput {
   name: String
+  shortDescription: String
   description: String
   siteUrl: String
   codeUrl: String
@@ -239,6 +233,7 @@ input ProjectUpdateArgs {
 
 input ProjectCreateInput {
   name: String
+  shortDescription: String
   description: String
   siteUrl: String
   codeUrl: String
@@ -350,8 +345,6 @@ type UserAuthenticationWithPasswordFailure {
 }
 
 input CreateInitialUserInput {
-  firstName: String
-  lastName: String
   email: String
   password: String
 }

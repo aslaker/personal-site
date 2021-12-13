@@ -1,15 +1,28 @@
 import React, { useState } from "react";
+import useLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import Link from "next/link";
 import classNames from "classnames";
 
 const MainLayout: React.FC = ({ children }) => {
-  const [hideMenu, setHideMenu] = useState(true);
+  const [hideMenu, setHideMenu] = useState<boolean | null>(null);
+
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") {
+      const mediumWindow = window.matchMedia("(min-width: 768px");
+      if (mediumWindow.matches) {
+        setHideMenu(false);
+      } else {
+        setHideMenu(true);
+      }
+    }
+  }, []);
 
   const handleNavClick = () => {
     setHideMenu((state) => !state);
   };
+
   return (
-    <div className="relative min-h-screen flex flex-col md:items-stretch">
+    <div className="h-screen md:flex">
       <div
         className={classNames(
           {
@@ -18,14 +31,16 @@ const MainLayout: React.FC = ({ children }) => {
             "bg-secondary-900": hideMenu,
             "text-white": hideMenu,
           },
-          "flex justify-end ease-in-out duration-500 p-3"
+          "flex md:hidden justify-end ease-in-out duration-500 p-3"
         )}
       >
         <button onClick={handleNavClick}>Menu</button>
       </div>
       <div className={classNames({ "-translate-x-full": hideMenu }, "navbar")}>
         <span className="font-bold text-2xl self-center text-primary-400">
-          Logo
+          <Link href="/">
+            <a>Logo</a>
+          </Link>
         </span>
         <nav className="flex flex-col items-center gap-10">
           <Link href="/projects">
@@ -39,7 +54,7 @@ const MainLayout: React.FC = ({ children }) => {
           </Link>
         </nav>
       </div>
-      <main>{children}</main>
+      <main className="h-full w-full">{children}</main>
     </div>
   );
 };

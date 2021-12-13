@@ -12,13 +12,11 @@ generator client {
 }
 
 model User {
-  id        String @id @default(cuid())
-  firstName String @default("")
-  lastName  String @default("")
-  name      String @default("")
-  email     String @unique @default("")
-  password  String
-  posts     Post[] @relation("Post_author")
+  id       String @id @default(cuid())
+  name     String @default("")
+  email    String @unique @default("")
+  password String
+  posts    Post[] @relation("Post_author")
 }
 
 model Post {
@@ -33,11 +31,12 @@ model Post {
 }
 
 model Project {
-  id          String @id @default(cuid())
-  name        String @default("")
-  description String @default("")
-  siteUrl     String @default("")
-  codeUrl     String @default("")
+  id               String @id @default(cuid())
+  name             String @default("")
+  shortDescription String @default("")
+  description      String @default("")
+  siteUrl          String @default("")
+  codeUrl          String @default("")
 }
 
 model Page {
