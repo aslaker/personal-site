@@ -18,11 +18,11 @@ const ProjectsPage: NextLayoutComponentType<
   return (
     <>
       <Head>
-        <title>{page.headerText}</title>
+        <title>{page.name}</title>
       </Head>
-      <div className="h-full max-h-full p-5 flex flex-col justify-start items-center gap-6">
+      <div className="h-full p-5 flex flex-col gap-5">
         <h1 className="text-4xl font-bold">{page.headerText}</h1>
-        <ul className="flex flex-col h-screen w-full space-y-4 overflow-y-scroll">
+        <ul className=" h-0 flex-1 overflow-y-auto space-y-5">
           {projects.map((project) => (
             <li
               className="flex flex-col h-64 rounded-md bg-gray-100  shadow-lg"

@@ -22,7 +22,7 @@ const MainLayout: React.FC = ({ children }) => {
   };
 
   return (
-    <div className="max-h-screen min-h-screen md:flex">
+    <div className="h-screen md:flex">
       <div
         className={classNames(
           {
@@ -54,7 +54,7 @@ const MainLayout: React.FC = ({ children }) => {
           </Link>
         </nav>
       </div>
-      <main className="h-full w-full max-h-full">{children}</main>
+      <main className="h-full w-full">{children}</main>
     </div>
   );
 };

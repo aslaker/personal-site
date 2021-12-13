@@ -11,7 +11,7 @@ const AboutPage: NextLayoutComponentType<
   return (
     <>
       <Head>
-        <title>{page.headerText}</title>
+        <title>{page.name}</title>
       </Head>
       <h1>{page.headerText}</h1>
       <p>{page.aboutText}</p>
@@ -26,7 +26,7 @@ AboutPage.getLayout = function getLayout(page: ReactNode) {
 export async function getStaticProps() {
   const page: Page = await query.Page.findOne({
     where: { name: "About" },
-    query: "headerText aboutText",
+    query: "name headerText aboutText",
   });
   return {
     props: { page },

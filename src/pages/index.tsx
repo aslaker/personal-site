@@ -14,7 +14,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   return (
     <>
       <Head>
-        <title>{page.headerText}</title>
+        <title>{page.name}</title>
       </Head>
       <div className="flex flex-col p-10 justify-center items-end md:items-center gap-12 min-h-screen bg-gray-900 text-white">
         <div className="flex flex-col items-end md:items-center md:gap-4">
@@ -39,7 +39,7 @@ export default Home;
 export async function getStaticProps() {
   const page: Page = await query.Page.findOne({
     where: { name: "Home" },
-    query: "headerText aboutText",
+    query: "name headerText aboutText",
   });
   return {
     props: { page },

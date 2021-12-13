@@ -20,7 +20,7 @@ const Blog: NextLayoutComponentType<
     <div>
       <main style={{ margin: "3rem" }}>
         <Head>
-          <title>{page.headerText}</title>
+          <title>{page.name}</title>
         </Head>
         <ul>
           {/* Render each post with a link to the content page */}
@@ -48,7 +48,7 @@ Blog.getLayout = function getLayout(page: ReactNode) {
 export async function getStaticProps() {
   const page: Page = await query.Page.findOne({
     where: { name: "Blog" },
-    query: "headerText aboutText",
+    query: "name headerText aboutText",
   });
   const posts: Post[] = await query.Post.findMany({ query: "id title slug" });
   return { props: { posts, page } };
