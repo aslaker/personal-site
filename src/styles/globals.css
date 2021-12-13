@@ -6,15 +6,29 @@
 
 @layer base {
   @font-face {
-    font-family: Roboto;
-    font-weight: 400;
-    src: url("/fonts/Roboto-Regular.woff") format("woff");
+    font-family: "Roboto";
+    src: url("/fonts/Roboto-Bold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
   }
+
   @font-face {
-    font-family: Roboto;
-    font-weight: 500;
+    font-family: "Roboto";
     src: url("/fonts/Roboto-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
   }
+
+  @font-face {
+    font-family: "Roboto";
+    src: url("/fonts/Roboto-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
   html {
     @apply h-full w-full;
   }
