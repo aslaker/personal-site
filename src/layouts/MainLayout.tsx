@@ -4,21 +4,28 @@ import Link from "next/link";
 import classNames from "classnames";
 
 const MainLayout: React.FC = ({ children }) => {
-  const [hideMenu, setHideMenu] = useState<boolean | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(true);
+  const [hideMenu, setHideMenu] = useState<boolean | null>(true);
 
   useLayoutEffect(() => {
     if (typeof window !== "undefined") {
       const mediumWindow = window.matchMedia("(min-width: 768px");
       if (mediumWindow.matches) {
+        setIsMobile(false);
         setHideMenu(false);
       } else {
+        setIsMobile(true);
         setHideMenu(true);
       }
     }
   }, []);
 
   const handleNavClick = () => {
-    setHideMenu((state) => !state);
+    if (isMobile) {
+      setHideMenu((state) => !state);
+    } else {
+      return;
+    }
   };
 
   return (
