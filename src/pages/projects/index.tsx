@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
+import { motion } from "framer-motion";
 import { query } from ".keystone/api";
 import { NextLayoutComponentType } from "next";
 import type { InferGetStaticPropsType } from "next";
-import { Page, Project } from "../../types/data.types";
-import MainLayout from "../../layouts/MainLayout";
-import { AiFillGithub } from "react-icons/ai";
-import { IconContext } from "react-icons/lib";
 import Head from "next/head";
+import { IconContext } from "react-icons/lib";
+import { AiFillGithub } from "react-icons/ai";
+import MainLayout from "../../layouts/MainLayout";
+import type { Page, Project } from "../../types/data.types";
 
 //TODO: #4 Add technology icons based on selections from custom multi-select
 //TODO: #6 Update styles to accomodate for desktop
 //TODO: #7 Test styles on mobile
-//TODO: #10 Stop menu from disappearing after click on desktop
 const ProjectsPage: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page, projects }) => {
@@ -22,26 +22,40 @@ const ProjectsPage: NextLayoutComponentType<
       </Head>
       <div className="h-full p-5 flex flex-col gap-5">
         <h1 className="text-4xl font-bold">{page.headerText}</h1>
-        <ul className=" h-0 flex-1 overflow-y-auto space-y-5">
+        <div className="h-0 flex-1 overflow-y-auto space-y-5">
           {projects.map((project) => (
-            <li
-              className="flex flex-col h-64 rounded-md bg-gray-100  shadow-lg"
+            <div
+              className="flex flex-col justify-between h-48 rounded-md bg-gray-100 shadow-lg"
               key={project.id}
             >
-              <div className="flex justify-between items-center rounded-t-md p-2 bg-primary-400">
+              <div className="flex justify-between items-center rounded-t-md p-3 bg-primary-400">
                 <span className="text-lg font-bold">{project.name}</span>
-                <a href={project.codeUrl} target="_blank" rel="noreferrer">
+                <motion.a
+                  href={project.codeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{
+                    className: "shadow-md",
+                    position: "relative",
+                    zIndex: 1,
+                    scale: 1.3,
+                    transition: {
+                      duration: 0.2,
+                    },
+                  }}
+                >
                   <IconContext.Provider value={{ size: "30px" }}>
                     <AiFillGithub />
                   </IconContext.Provider>
-                </a>
+                </motion.a>
               </div>
-              <div className="max-h-full h-full rounded-md p-2">
-                <p className="text-xs">{project.shortDescription}</p>
+              <div className="rounded-md p-3 h-full w-full">
+                <p className="text-sm text-left">{project.shortDescription}</p>
               </div>
-            </li>
+              <div className="bg-gray-200 p-2 rounded-b-md">Icons</div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </>
   );
@@ -59,7 +73,7 @@ export async function getStaticProps() {
     query: "name headerText",
   });
   const projects: Project[] = await query.Project.findMany({
-    query: "id name description siteUrl, codeUrl shortDescription",
+    query: "id name description siteUrl, codeUrl shortDescription technologies",
   });
   return {
     props: { page, projects },

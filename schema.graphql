@@ -189,6 +189,7 @@ type Project {
   name: String
   shortDescription: String
   description: String
+  technologies: JSON
   siteUrl: String
   codeUrl: String
 }
@@ -222,6 +223,7 @@ input ProjectUpdateInput {
   name: String
   shortDescription: String
   description: String
+  technologies: JSON
   siteUrl: String
   codeUrl: String
 }
@@ -235,6 +237,7 @@ input ProjectCreateInput {
   name: String
   shortDescription: String
   description: String
+  technologies: JSON
   siteUrl: String
   codeUrl: String
 }

@@ -1,9 +1,5 @@
 import { list } from "@keystone-6/core";
-import {
-  password,
-  relationship,
-  text,
-} from "@keystone-6/core/fields";
+import { json, password, relationship, text } from "@keystone-6/core/fields";
 import { document } from "@keystone-6/fields-document";
 
 export const lists = {
@@ -46,18 +42,7 @@ export const lists = {
           displayMode: "textarea",
         },
       }),
-      // TODO: #3 Create custom multi-select field
-      // technologies: select({
-      //   type: "enum",
-      //   options: [
-      //     { label: "GraphQL", value: "GRAPHQL" },
-      //     { label: "React", value: "REACT" },
-      //     { label: "NextJS", value: "NEXTJS" },
-      //   ],
-      //   ui: {
-      //     displayMode: "select",
-      //   },
-      // }),
+      technologies: json({ defaultValue: [] }),
       siteUrl: text(),
       codeUrl: text(),
     },

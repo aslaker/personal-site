@@ -16,13 +16,13 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Head>
         <title>{page.name}</title>
       </Head>
-      <div className="flex flex-col p-10 justify-center items-end md:items-center gap-12 min-h-screen bg-gray-900 text-white">
-        <div className="flex flex-col items-end md:items-center md:gap-4">
-          <h1 className="font-sans text-xl md:text-4xl">
+      <div className="flex flex-col p-10 justify-center items-end gap-12 min-h-screen bg-gray-900 text-white">
+        <div className="flex flex-col justify-start items-end md:gap-4">
+          <h1 className="font-sans text-xl md:text-7xl">
             Hi my name is{" "}
             <span className="text-primary-400 font-bold">Adam Slaker</span>
           </h1>
-          <span className="font-sans text-lg md:text-xl">
+          <span className="font-sans text-lg md:text-5xl">
             I like to develop software.
           </span>
         </div>

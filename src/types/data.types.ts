@@ -12,6 +12,7 @@ export type Project = {
   description?: string;
   siteUrl?: string;
   codeUrl?: string;
+  technologies: string[];
 };
 
 export type Post = {

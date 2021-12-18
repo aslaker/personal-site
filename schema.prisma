@@ -31,12 +31,13 @@ model Post {
 }
 
 model Project {
-  id               String @id @default(cuid())
-  name             String @default("")
-  shortDescription String @default("")
-  description      String @default("")
-  siteUrl          String @default("")
-  codeUrl          String @default("")
+  id               String  @id @default(cuid())
+  name             String  @default("")
+  shortDescription String  @default("")
+  description      String  @default("")
+  technologies     String? @default("[]")
+  siteUrl          String  @default("")
+  codeUrl          String  @default("")
 }
 
 model Page {
