@@ -9,6 +9,12 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
+      screens: {
+        ltsm: { max: "640px" },
+        ltmd: { max: "1023px" },
+        ltlg: { max: "1279px" },
+        ltxl: { max: "1280px" },
+      },
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
       },

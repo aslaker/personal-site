@@ -20,12 +20,12 @@ const ProjectsPage: NextLayoutComponentType<
       <Head>
         <title>{page.name}</title>
       </Head>
-      <div className="h-full p-5 flex flex-col gap-5">
+      <div className="h-full max-h-screen px-5 pt-5 flex flex-col gap-5">
         <h1 className="text-4xl font-bold">{page.headerText}</h1>
-        <div className="h-0 flex-1 overflow-y-auto space-y-5">
+        <div className="projects-display">
           {projects.map((project) => (
             <div
-              className="flex flex-col justify-between h-48 rounded-md bg-gray-100 shadow-lg"
+              className="flex flex-col justify-between lg:min-h-full ltmd:h-48 rounded-md bg-gray-100 shadow-lg"
               key={project.id}
             >
               <div className="flex justify-between items-center rounded-t-md p-3 bg-primary-400">
