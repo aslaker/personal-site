@@ -24,10 +24,10 @@ AboutPage.getLayout = function getLayout(page: ReactNode) {
 };
 
 export async function getStaticProps() {
-  const page: Page = await query.Page.findOne({
+  const page = (await query.Page.findOne({
     where: { name: "About" },
     query: "name headerText aboutText",
-  });
+  })) as Page;
   return {
     props: { page },
   };

@@ -22,11 +22,11 @@ module.exports = {
         transparent: "transparent",
         current: "currentColor",
         primary: colors.emerald,
-        secondary: colors.coolGray,
+        secondary: colors.gray,
       },
       textColor: {
         primary: colors.emerald,
-        secondary: colors.coolGray,
+        secondary: colors.gray,
       },
     },
   },

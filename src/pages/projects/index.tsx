@@ -76,13 +76,13 @@ ProjectsPage.getLayout = function getLayout(page: ReactNode) {
 };
 
 export async function getStaticProps() {
-  const page: Page = await query.Page.findOne({
+  const page = (await query.Page.findOne({
     where: { name: "Projects" },
     query: "id name headerText",
-  });
-  const projects: Project[] = await query.Project.findMany({
+  })) as Page;
+  const projects = (await query.Project.findMany({
     query: "id name description siteUrl, codeUrl shortDescription technologies",
-  });
+  })) as readonly Project[];
   return {
     props: { page, projects },
   };
