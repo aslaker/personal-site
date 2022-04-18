@@ -46,10 +46,12 @@ Blog.getLayout = function getLayout(page: ReactNode) {
 // Here we use the Lists API to load all the posts we want to display
 // The return of this function is provided to the `Home` component
 export async function getStaticProps() {
-  const page: Page = await query.Page.findOne({
+  const page = (await query.Page.findOne({
     where: { name: "Blog" },
     query: "name headerText aboutText",
-  });
-  const posts: Post[] = await query.Post.findMany({ query: "id title slug" });
+  })) as Page;
+  const posts = (await query.Post.findMany({
+    query: "id title slug",
+  })) as Post[];
   return { props: { posts, page } };
 }

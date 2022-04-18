@@ -1,3 +1,5 @@
+import { Technology } from "../components/TechIcon/TechIcon";
+
 export type Page = {
   id: string;
   name: string;
@@ -12,7 +14,7 @@ export type Project = {
   description?: string;
   siteUrl?: string;
   codeUrl?: string;
-  technologies: string[];
+  technologies: Technology[];
 };
 
 export type Post = {

@@ -39,10 +39,10 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 export default Home;
 
 export async function getStaticProps() {
-  const page: Page = await query.Page.findOne({
+  const page = await query.Page.findOne({
     where: { name: "Home" },
     query: "name headerText aboutText",
-  });
+  }) as Page;
   return {
     props: { page },
   };

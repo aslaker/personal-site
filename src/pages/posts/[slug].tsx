@@ -28,9 +28,9 @@ const PostPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 export default PostPage;
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const posts: Post[] = await query.Post.findMany({
+  const posts = await query.Post.findMany({
     query: `slug`,
-  });
+  }) as Post[];
 
   const paths = posts
     .map((post) => post.slug)
@@ -48,9 +48,9 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const post: Post = await query.Post.findOne({
+  const post = (await query.Post.findOne({
     where: { slug: params!.slug as string },
     query: "id title",
-  });
+  })) as Post;
   return { props: { post } };
 }

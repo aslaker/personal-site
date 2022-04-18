@@ -8,6 +8,7 @@ import { IconContext } from "react-icons/lib";
 import { AiFillGithub } from "react-icons/ai";
 import MainLayout from "../../layouts/MainLayout";
 import type { Page, Project } from "../../types/data.types";
+import TechIcon from "../../components/TechIcon/TechIcon";
 
 //TODO: #4 Add technology icons based on selections from custom multi-select
 //TODO: #6 Update styles to accomodate for desktop
@@ -52,7 +53,14 @@ const ProjectsPage: NextLayoutComponentType<
               <div className="rounded-md p-3 h-full w-full">
                 <p className="text-sm text-left">{project.shortDescription}</p>
               </div>
-              <div className="bg-gray-200 p-2 rounded-b-md">Icons</div>
+              <div className="flex justify-between items-center bg-gray-200 p-2 rounded-b-md">
+                {project.technologies.map((tech, index) => (
+                  <TechIcon
+                    key={`${Math.random() * index}`}
+                    technology={tech}
+                  />
+                ))}
+              </div>
             </div>
           ))}
         </div>
@@ -68,13 +76,13 @@ ProjectsPage.getLayout = function getLayout(page: ReactNode) {
 };
 
 export async function getStaticProps() {
-  const page: Page = await query.Page.findOne({
+  const page = (await query.Page.findOne({
     where: { name: "Projects" },
-    query: "name headerText",
-  });
-  const projects: Project[] = await query.Project.findMany({
+    query: "id name headerText",
+  })) as Page;
+  const projects = (await query.Project.findMany({
     query: "id name description siteUrl, codeUrl shortDescription technologies",
-  });
+  })) as readonly Project[];
   return {
     props: { page, projects },
   };
