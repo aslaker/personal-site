@@ -1,16 +1,11 @@
-import type {
-  GetStaticPropsResult,
-  InferGetStaticPropsType,
-  NextPage,
-} from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
-import { Page } from "../types/data.types";
+import type { Page } from "../types/data.types";
 import { keystoneContext } from "../keystone/context";
 
 export async function getStaticProps() {
-  const context = await keystoneContext;
-  const page = (await context.query.Page.findOne({
+  const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Home" },
     query: "name headerText aboutText",
   })) as Page;

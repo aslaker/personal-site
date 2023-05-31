@@ -1,4 +1,4 @@
-import { Technology } from "../components/TechIcon/TechIcon";
+import type { Technology } from "../components/TechIcon/TechIcon";
 
 export type Page = {
   id: string;

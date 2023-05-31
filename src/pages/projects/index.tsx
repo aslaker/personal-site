@@ -1,6 +1,5 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { NextLayoutComponentType } from "next";
 import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { IconContext } from "react-icons/lib";
@@ -9,14 +8,14 @@ import MainLayout from "../../layouts/MainLayout";
 import type { Page, Project } from "../../types/data.types";
 import TechIcon from "../../components/TechIcon/TechIcon";
 import { keystoneContext } from "../../keystone/context";
+import type { NextPageWithLayout } from "../_app";
 
 export async function getStaticProps() {
-  const context = await keystoneContext;
-  const page = (await context.query.Page.findOne({
+  const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Projects" },
     query: "id name headerText",
   })) as Page;
-  const projects = (await context.query.Project.findMany({
+  const projects = (await keystoneContext.query.Project.findMany({
     query: "id name description siteUrl, codeUrl shortDescription technologies",
   })) as Project[];
   return {
@@ -27,7 +26,7 @@ export async function getStaticProps() {
 //TODO: #4 Add technology icons based on selections from custom multi-select
 //TODO: #6 Update styles to accomodate for desktop
 //TODO: #7 Test styles on mobile
-const ProjectsPage: NextLayoutComponentType<
+const ProjectsPage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page, projects }) => {
   return (

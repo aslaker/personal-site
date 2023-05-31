@@ -1,16 +1,15 @@
-import {
+import type {
   GetStaticPathsResult,
   GetStaticPropsContext,
   InferGetStaticPropsType,
   NextPage,
 } from "next";
 import Link from "next/link";
-import { Post } from "../../types/data.types";
+import type { Post } from "../../types/data.types";
 import { keystoneContext } from "../../keystone/context";
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const context = await keystoneContext;
-  const posts = (await context.query.Post.findMany({
+  const posts = (await keystoneContext.query.Post.findMany({
     query: `slug`,
   })) as Post[];
 
@@ -30,9 +29,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
-  const context = await keystoneContext;
-  const post = (await context.query.Post.findOne({
-    where: { slug: params!.slug as string },
+  const post = (await keystoneContext.query.Post.findOne({
+    where: { slug: params?.slug as string },
     query: "id title",
   })) as Post;
   return { props: { post } };

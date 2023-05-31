@@ -1,13 +1,6 @@
 import React from "react";
 import { DiReact } from "react-icons/di";
 import { GrGraphQl } from "react-icons/gr";
-import {
-  CgShapeCircle,
-  CgShapeHexagon,
-  CgShapeRhombus,
-  CgShapeSquare,
-  CgShapeTriangle,
-} from "react-icons/cg";
 
 export type Technology =
   | "react"
@@ -25,14 +18,6 @@ interface Props {
 }
 
 function getIcon(technologyType: Technology) {
-  const defaultIcons = [
-    CgShapeCircle,
-    CgShapeHexagon,
-    CgShapeRhombus,
-    CgShapeSquare,
-    CgShapeTriangle,
-  ];
-
   switch (technologyType) {
     case "react": {
       return <DiReact />;

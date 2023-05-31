@@ -1,30 +1,26 @@
-import type {
-  InferGetStaticPropsType,
-  NextLayoutComponentType,
-  NextPage,
-} from "next";
+import type { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 
 // Import the generated Lists API from Keystone
-import { Page, Post } from "../../types/data.types";
-import { ReactNode } from "react";
+import type { Page, Post } from "../../types/data.types";
+import type { ReactNode } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import Head from "next/head";
 import { keystoneContext } from "../../keystone/context";
+import type { NextPageWithLayout } from "../_app";
 
 export async function getStaticProps() {
-  const context = await keystoneContext;
-  const page = (await context.query.Page.findOne({
+  const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Blog" },
     query: "name headerText aboutText",
   })) as Page;
-  const posts = (await context.query.Post.findMany({
+  const posts = (await keystoneContext.query.Post.findMany({
     query: "id title slug",
   })) as Post[];
   return { props: { posts, page } };
 }
 
-const Blog: NextLayoutComponentType<
+const Blog: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ posts, page }) => {
   return (

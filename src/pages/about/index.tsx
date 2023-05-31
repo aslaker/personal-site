@@ -1,13 +1,13 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import type { Page } from "../../types/data.types";
-import { InferGetStaticPropsType, NextLayoutComponentType } from "next";
+import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { keystoneContext } from "../../keystone/context";
+import type { NextPageWithLayout } from "../_app";
 
 export async function getStaticProps() {
-  const context = await keystoneContext;
-  const page = (await context.query.Page.findOne({
+  const page = (await keystoneContext.query.Page.findOne({
     where: { name: "About" },
     query: "name headerText aboutText",
   })) as Page;
@@ -16,7 +16,7 @@ export async function getStaticProps() {
   };
 }
 
-const AboutPage: NextLayoutComponentType<
+const AboutPage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page }) => {
   return (

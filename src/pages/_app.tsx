@@ -1,10 +1,10 @@
 import type { ReactElement, ReactNode } from "react";
-import { AppProps } from "next/app";
-import type { NextComponentType, NextPage } from "next";
+import type { AppProps } from "next/app";
+import type { NextPage } from "next";
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
