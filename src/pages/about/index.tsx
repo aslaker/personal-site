@@ -1,9 +1,20 @@
 import React, { ReactNode } from "react";
 import MainLayout from "../../layouts/MainLayout";
-import { query } from ".keystone/api";
 import type { Page } from "../../types/data.types";
 import { InferGetStaticPropsType, NextLayoutComponentType } from "next";
 import Head from "next/head";
+import { keystoneContext } from "../../keystone/context";
+
+export async function getStaticProps() {
+  const context = await keystoneContext;
+  const page = (await context.query.Page.findOne({
+    where: { name: "About" },
+    query: "name headerText aboutText",
+  })) as Page;
+  return {
+    props: { page },
+  };
+}
 
 const AboutPage: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
@@ -22,15 +33,5 @@ const AboutPage: NextLayoutComponentType<
 AboutPage.getLayout = function getLayout(page: ReactNode) {
   return <MainLayout>{page}</MainLayout>;
 };
-
-export async function getStaticProps() {
-  const page = (await query.Page.findOne({
-    where: { name: "About" },
-    query: "name headerText aboutText",
-  })) as Page;
-  return {
-    props: { page },
-  };
-}
 
 export default AboutPage;

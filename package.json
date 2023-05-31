@@ -2,34 +2,54 @@
   "name": "personal-site",
   "private": true,
   "scripts": {
+    "keystone:dev": "keystone dev",
+    "keystone:build": "keystone build",
+    "keystone:start": "keystone start",
+    "next:dev": "next dev -p 4000",
+    "next:build": "next build",
+    "build": "pnpm keystone build --no-ui && pnpm next build",
     "postinstall": "keystone postinstall",
-    "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "dx": "concurrently --names \"NEXTJS,KEYSTONE\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run next:dev\" \"npm run keystone:dev\""
   },
   "dependencies": {
-    "@keystone-6/auth": "^1.0.0",
-    "@keystone-6/core": "^1.0.0",
-    "@keystone-6/fields-document": "^1.0.1",
+    "@keystone-6/auth": "7.0.0",
+    "@keystone-6/core": "^5.3.0",
+    "@keystone-6/fields-document": "^8.0.0",
+    "@preconstruct/next": "^4.0.0",
+    "@prisma/client": "^4.14.1",
+    "@t3-oss/env-nextjs": "^0.4.0",
     "classnames": "^2.3.1",
     "dotenv-load": "^2.0.0",
     "framer-motion": "^6.2.8",
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "next": "^13.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.3.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/dotenv-load": "^2.0.0",
-    "@types/node": "17.0.21",
-    "@types/react": "17.0.40",
-    "autoprefixer": "^10.4.0",
-    "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0",
-    "postcss": "^8.4.5",
+    "@types/eslint": "^8.40.0",
+    "@types/node": "^18.16.16",
+    "@types/prettier": "^2.7.3",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.0.1",
+    "eslint": "^8.41.0",
+    "eslint-config-next": "^13.4.4",
+    "postcss": "^8.4.24",
     "postcss-import": "^14.0.2",
-    "tailwindcss": "^3.0.2",
-    "typescript": "4.6.2"
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "prisma": "^4.15.0",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.0.4"
+  },
+  "volta": {
+    "node": "18.16.0"
   }
 }

@@ -1,17 +1,51 @@
 import { list } from "@keystone-6/core";
-import { json, password, relationship, text } from "@keystone-6/core/fields";
+import { allowAll } from "@keystone-6/core/access";
+import {
+  checkbox,
+  json,
+  password,
+  relationship,
+  text,
+} from "@keystone-6/core/fields";
 import { document } from "@keystone-6/fields-document";
+
+type Session = {
+  data: {
+    id: string;
+    isAdmin: boolean;
+  };
+};
+
+const isAdmin = ({ session }: { session?: Session }) =>
+  session?.data.isAdmin ?? false;
 
 export const lists = {
   User: list({
+    access: {
+      operation: {
+        query: allowAll,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({ isIndexed: "unique", validation: { isRequired: true } }),
       password: password({ validation: { isRequired: true } }),
       posts: relationship({ ref: "Post.author", many: true }),
+      isAdmin: checkbox({ defaultValue: false }),
     },
   }),
   Post: list({
+    access: {
+      operation: {
+        query: allowAll,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      },
+    },
     fields: {
       title: text({ validation: { isRequired: true } }),
       slug: text({ isIndexed: "unique", isFilterable: true }),
@@ -28,6 +62,14 @@ export const lists = {
     },
   }),
   Project: list({
+    access: {
+      operation: {
+        query: allowAll,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       shortDescription: text({
@@ -48,6 +90,14 @@ export const lists = {
     },
   }),
   Page: list({
+    access: {
+      operation: {
+        query: allowAll,
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+      },
+    },
     fields: {
       name: text({ isIndexed: "unique", validation: { isRequired: true } }),
       headerText: text(),

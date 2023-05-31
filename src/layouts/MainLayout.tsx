@@ -3,7 +3,11 @@ import useLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import Link from "next/link";
 import classNames from "classnames";
 
-const MainLayout: React.FC = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const MainLayout: React.FC<Props> = ({ children }) => {
   const [isMobile, setIsMobile] = useState<boolean>(true);
   const [hideMenu, setHideMenu] = useState<boolean | null>(true);
 
@@ -38,26 +42,26 @@ const MainLayout: React.FC = ({ children }) => {
             "bg-secondary-900": hideMenu,
             "text-white": hideMenu,
           },
-          "flex md:hidden justify-end ease-in-out duration-500 p-3"
+          "flex justify-end p-3 duration-500 ease-in-out md:hidden"
         )}
       >
         <button onClick={handleNavClick}>Menu</button>
       </div>
       <div className={classNames({ "-translate-x-full": hideMenu }, "navbar")}>
-        <span className="font-bold text-2xl self-center text-primary-400">
+        <span className="text-primary-400 self-center text-2xl font-bold">
           <Link href="/">
-            <a>Logo</a>
+            Logo
           </Link>
         </span>
         <nav className="flex flex-col items-center gap-10">
-          <Link href="/projects">
-            <a onClick={handleNavClick}>Projects</a>
+          <Link href="/projects" onClick={handleNavClick}>
+            Projects
           </Link>
-          <Link href="/posts">
-            <a onClick={handleNavClick}>Blog</a>
+          <Link href="/posts" onClick={handleNavClick}>
+            Blog
           </Link>
-          <Link href="/about">
-            <a onClick={handleNavClick}>About Me</a>
+          <Link href="/about" onClick={handleNavClick}>
+            About Me
           </Link>
         </nav>
       </div>

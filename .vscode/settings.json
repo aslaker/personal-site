@@ -6,5 +6,6 @@
         "FIXME:",
         "ISSUE:",
         "HACK:"
-    ]
+    ],
+    "prettier.configPath": "prettier.config.cjs"
 }

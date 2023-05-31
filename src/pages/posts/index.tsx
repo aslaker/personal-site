@@ -6,13 +6,24 @@ import type {
 import Link from "next/link";
 
 // Import the generated Lists API from Keystone
-import { query } from ".keystone/api";
 import { Page, Post } from "../../types/data.types";
 import { ReactNode } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import Head from "next/head";
+import { keystoneContext } from "../../keystone/context";
 
-// Home receives a `posts` prop from `getStaticProps` below
+export async function getStaticProps() {
+  const context = await keystoneContext;
+  const page = (await context.query.Page.findOne({
+    where: { name: "Blog" },
+    query: "name headerText aboutText",
+  })) as Page;
+  const posts = (await context.query.Post.findMany({
+    query: "id title slug",
+  })) as Post[];
+  return { props: { posts, page } };
+}
+
 const Blog: NextLayoutComponentType<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ posts, page }) => {
@@ -23,12 +34,9 @@ const Blog: NextLayoutComponentType<
           <title>{page.name}</title>
         </Head>
         <ul>
-          {/* Render each post with a link to the content page */}
           {posts.map((post) => (
             <li key={post.id}>
-              <Link href={`/posts/${post.slug}`}>
-                <a>{post.title}</a>
-              </Link>
+              <Link href={`/posts/${post.slug}`}>{post.title}</Link>
             </li>
           ))}
         </ul>
@@ -42,16 +50,3 @@ export default Blog;
 Blog.getLayout = function getLayout(page: ReactNode) {
   return <MainLayout>{page}</MainLayout>;
 };
-
-// Here we use the Lists API to load all the posts we want to display
-// The return of this function is provided to the `Home` component
-export async function getStaticProps() {
-  const page = (await query.Page.findOne({
-    where: { name: "Blog" },
-    query: "name headerText aboutText",
-  })) as Page;
-  const posts = (await query.Post.findMany({
-    query: "id title slug",
-  })) as Post[];
-  return { props: { posts, page } };
-}
