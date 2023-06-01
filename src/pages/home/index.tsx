@@ -9,11 +9,12 @@ import type { Page, Project } from "../../types/data.types";
 import TechIcon from "../../components/TechIcon/TechIcon";
 import { keystoneContext } from "../../keystone/context";
 import type { NextPageWithLayout } from "../_app";
+import { Home } from "@/components/home/Home";
 
 export async function getStaticProps() {
   const page = (await keystoneContext.query.Page.findOne({
-    where: { name: "Projects" },
-    query: "id name headerText",
+    where: { name: "Home" },
+    query: "id name headerText aboutText{ document }",
   })) as Page;
   const projects = (await keystoneContext.query.Project.findMany({
     query: "id name description siteUrl, codeUrl shortDescription technologies",
@@ -26,12 +27,13 @@ export async function getStaticProps() {
 //TODO: #4 Add technology icons based on selections from custom multi-select
 //TODO: #6 Update styles to accomodate for desktop
 //TODO: #7 Test styles on mobile
-const ProjectsPage: NextPageWithLayout<
+const HomePage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page, projects }) => {
   return (
     <>
-      <Head>
+      <Home pageData={page} projects={projects} />
+      {/* <Head>
         <title>{page.name}</title>
       </Head>
       <div className="flex h-full max-h-screen flex-col gap-5 px-5 pt-5">
@@ -77,13 +79,13 @@ const ProjectsPage: NextPageWithLayout<
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
 
-export default ProjectsPage;
+export default HomePage;
 
-ProjectsPage.getLayout = function getLayout(page: ReactNode) {
+HomePage.getLayout = function getLayout(page: ReactNode) {
   return <MainLayout>{page}</MainLayout>;
 };

@@ -101,7 +101,15 @@ export const lists = {
     fields: {
       name: text({ isIndexed: "unique", validation: { isRequired: true } }),
       headerText: text(),
-      aboutText: text(),
+      aboutText: document({
+        formatting: true,
+        dividers: true,
+        links: true,
+        layouts: [
+          [1, 1],
+          [1, 1, 1],
+        ],
+      }),
     },
   }),
 };

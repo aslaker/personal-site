@@ -15,17 +15,21 @@
   "dependencies": {
     "@keystone-6/auth": "7.0.0",
     "@keystone-6/core": "^5.3.0",
+    "@keystone-6/document-renderer": "^1.1.2",
     "@keystone-6/fields-document": "^8.0.0",
     "@preconstruct/next": "^4.0.0",
     "@prisma/client": "^4.14.1",
     "@t3-oss/env-nextjs": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.9",
     "classnames": "^2.3.1",
+    "daisyui": "^3.0.0",
     "dotenv-load": "^2.0.0",
     "framer-motion": "^6.2.8",
     "next": "^13.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
+    "usehooks-ts": "^2.9.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {

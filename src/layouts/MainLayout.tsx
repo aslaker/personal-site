@@ -1,72 +1,60 @@
-import React, { useState } from "react";
-import useLayoutEffect from "../hooks/useIsomorphicLayoutEffect";
 import Link from "next/link";
-import classNames from "classnames";
+import { useEffect } from "react";
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import { useDarkMode } from "usehooks-ts";
 
 type Props = {
   children: React.ReactNode;
 };
 
+const LIGHT_MODE = "emerald";
+const DARK_MODE = "forest";
+
 const MainLayout: React.FC<Props> = ({ children }) => {
-  const [isMobile, setIsMobile] = useState<boolean>(true);
-  const [hideMenu, setHideMenu] = useState<boolean | null>(true);
+  const { isDarkMode, toggle } = useDarkMode();
 
-  useLayoutEffect(() => {
-    if (typeof window !== "undefined") {
-      const mediumWindow = window.matchMedia("(min-width: 768px");
-      if (mediumWindow.matches) {
-        setIsMobile(false);
-        setHideMenu(false);
-      } else {
-        setIsMobile(true);
-        setHideMenu(true);
-      }
-    }
-  }, []);
-
-  const handleNavClick = () => {
-    if (isMobile) {
-      setHideMenu((state) => !state);
-    } else {
-      return;
-    }
-  };
-
+  useEffect(() => {
+    document
+      .querySelector("html")
+      ?.setAttribute("data-theme", isDarkMode ? DARK_MODE : LIGHT_MODE);
+  }, [isDarkMode]);
   return (
-    <div className="h-screen md:flex">
-      <div
-        className={classNames(
-          {
-            "bg-secondary-300": !hideMenu,
-            "text-secondary-900": !hideMenu,
-            "bg-secondary-900": hideMenu,
-            "text-white": hideMenu,
-          },
-          "flex justify-end p-3 duration-500 ease-in-out md:hidden"
-        )}
-      >
-        <button onClick={handleNavClick}>Menu</button>
+    <>
+      <div className="navbar bg-base-100">
+        <div className="flex-1">
+          <a className="btn-ghost btn text-xl normal-case">
+            <span className="text-primary">Adam</span> Slaker
+          </a>
+        </div>
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link href="/home">Home</Link>
+            </li>
+            <li>
+              <Link href="/projects">Projects</Link>
+            </li>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact</Link>
+            </li>
+          </ul>
+        </div>
+        <label className="swap swap-rotate btn">
+          {/* this hidden checkbox controls the state */}
+          <input type="checkbox" checked={isDarkMode} onChange={toggle} />
+
+          {/* light mode */}
+          <BsFillSunFill className="swap-on w-10 text-xl" />
+
+          {/* dark mode */}
+          <BsFillMoonFill className="swap-off w-10 text-xl" />
+        </label>
       </div>
-      <div className={classNames({ "-translate-x-full": hideMenu }, "navbar")}>
-        <span className="text-primary-400 self-center text-2xl font-bold">
-          <Link href="/">
-            Logo
-          </Link>
-        </span>
-        <nav className="flex flex-col items-center gap-10">
-          <Link href="/projects" onClick={handleNavClick}>
-            Projects
-          </Link>
-          <Link href="/posts" onClick={handleNavClick}>
-            Blog
-          </Link>
-          <Link href="/about" onClick={handleNavClick}>
-            About Me
-          </Link>
-        </nav>
-      </div>
-      <main className="h-full w-full">{children}</main>
-    </div>
+      <main>{children}</main>
+    </>
   );
 };
 

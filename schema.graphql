@@ -251,7 +251,11 @@ type Page {
   id: ID!
   name: String
   headerText: String
-  aboutText: String
+  aboutText: Page_aboutText_Document
+}
+
+type Page_aboutText_Document {
+  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 input PageWhereUniqueInput {
@@ -266,20 +270,18 @@ input PageWhereInput {
   id: IDFilter
   name: StringFilter
   headerText: StringFilter
-  aboutText: StringFilter
 }
 
 input PageOrderByInput {
   id: OrderDirection
   name: OrderDirection
   headerText: OrderDirection
-  aboutText: OrderDirection
 }
 
 input PageUpdateInput {
   name: String
   headerText: String
-  aboutText: String
+  aboutText: JSON
 }
 
 input PageUpdateArgs {
@@ -290,7 +292,7 @@ input PageUpdateArgs {
 input PageCreateInput {
   name: String
   headerText: String
-  aboutText: String
+  aboutText: JSON
 }
 
 """
