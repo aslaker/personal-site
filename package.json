@@ -7,7 +7,7 @@
     "keystone:start": "keystone start",
     "next:dev": "next dev -p 4000",
     "next:build": "next build",
-    "build": "pnpm keystone build --no-ui && pnpm next build",
+    "build": "npx keystone build --no-ui && npx next build",
     "postinstall": "keystone postinstall",
     "start": "next start",
     "dx": "concurrently --names \"NEXTJS,KEYSTONE\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run next:dev\" \"npm run keystone:dev\""
@@ -30,7 +30,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
     "usehooks-ts": "^2.9.1",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "zod_utilz": "^0.7.3"
   },
   "devDependencies": {
     "@types/dotenv-load": "^2.0.0",

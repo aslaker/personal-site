@@ -1,38 +1,63 @@
-import { DocumentRenderer } from "@keystone-6/document-renderer";
-import { type Page, type Project } from "@prisma/client";
+import { type Project } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { RenderMarkup } from "@/components/common/RenderMarkup/RenderMarkup";
+import { type DeserializedPage } from "@/keystone/types";
+import { useMediaQuery } from "usehooks-ts";
+import tailwindConfig from "../../../tailwind.config";
+import resolveConfig from "tailwindcss/resolveConfig";
+import { HeroSection } from "./HeroSection/HeroSection";
 
-type Props = {
-  pageData: Page;
-  projects: Project[];
+type TabOption = "professionalProjects" | "personalProjects" | "digitalGarden";
+
+type TabConfig = {
+  name: string;
+  shortName: string;
+  key: TabOption;
 };
 
+const tabConfigs: TabConfig[] = [
+  {
+    name: "Professional Projects",
+    shortName: "Professional",
+    key: "professionalProjects",
+  },
+  {
+    name: "Personal Projects",
+    shortName: "Personal",
+    key: "personalProjects",
+  },
+  {
+    name: "Digital Garden",
+    shortName: "Garden",
+    key: "digitalGarden",
+  },
+];
+
+interface Props {
+  pageData: DeserializedPage;
+  projects: Project[];
+}
+
 export const Home: React.FC<Props> = ({ pageData, projects }) => {
+  // const [isMobile, setIsMobile] = useMediaQuery(
+  //   themeConfig.theme.screens.sm as string
+  // );
+  const [activeTab, setActiveTab] = useState<TabOption>("professionalProjects");
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex flex-col gap-20 text-center">
-        <div className="avatar">
-          <div className="relative w-56 rounded-full">
-            <Image fill src="/logo.png" alt="logo" />
-          </div>
-        </div>
-        <div className="prose max-w-md">
-          <h1 className="text-5xl font-bold">👋🏻 Hi I&apos;m Adam</h1>
-          <span>
-            <DocumentRenderer document={pageData.aboutText.document} />
-          </span>
-          {/* {pageData.aboutText} */}
-          {/* <p className="py-6">
-            I&apos;m a full stack engineer with a passion for building products.
-          </p>
-          <p>
-            I specialize in using modern technologies to craft immersive digital
-            experiences. With extensive experience collaborating with product
-            and design teams, I thrive on bringing complex ideas to life and
-            delivering exceptional results.
-          </p> */}
-          <button className="btn-primary btn">Get Started</button>
+    <div className="flex flex-col items-center gap-24">
+      <HeroSection content={pageData.aboutText.document} />
+      <div className="min-h-screen">
+        <div className="tabs tabs-boxed gap-7">
+          {tabConfigs.map((tab) => (
+            <a
+              key={tab.key}
+              className={`tab ${activeTab === tab.key ? "tab-active" : ""}`}
+              onClick={() => setActiveTab(tab.key)}
+            >
+              {tab.name}
+            </a>
+          ))}
         </div>
       </div>
     </div>

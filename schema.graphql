@@ -192,6 +192,7 @@ input UserRelateToOneForCreateInput {
 type Project {
   id: ID!
   name: String
+  projectType: String
   shortDescription: String
   description: String
   technologies: JSON
@@ -209,15 +210,31 @@ input ProjectWhereInput {
   NOT: [ProjectWhereInput!]
   id: IDFilter
   name: StringFilter
+  projectType: StringNullableFilter
   shortDescription: StringFilter
   description: StringFilter
   siteUrl: StringFilter
   codeUrl: StringFilter
 }
 
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: StringNullableFilter
+}
+
 input ProjectOrderByInput {
   id: OrderDirection
   name: OrderDirection
+  projectType: OrderDirection
   shortDescription: OrderDirection
   description: OrderDirection
   siteUrl: OrderDirection
@@ -226,6 +243,7 @@ input ProjectOrderByInput {
 
 input ProjectUpdateInput {
   name: String
+  projectType: String
   shortDescription: String
   description: String
   technologies: JSON
@@ -240,6 +258,7 @@ input ProjectUpdateArgs {
 
 input ProjectCreateInput {
   name: String
+  projectType: String
   shortDescription: String
   description: String
   technologies: JSON

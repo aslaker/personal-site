@@ -11,7 +11,7 @@ export type Project = {
   id: string;
   name: string;
   shortDescription: string;
-  description?: string;
+  description: string;
   siteUrl?: string;
   codeUrl?: string;
   technologies: Technology[];

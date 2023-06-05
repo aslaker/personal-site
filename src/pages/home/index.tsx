@@ -1,21 +1,17 @@
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
 import type { InferGetStaticPropsType } from "next";
-import Head from "next/head";
-import { IconContext } from "react-icons/lib";
-import { AiFillGithub } from "react-icons/ai";
 import MainLayout from "../../layouts/MainLayout";
-import type { Page, Project } from "../../types/data.types";
-import TechIcon from "../../components/TechIcon/TechIcon";
+import type { Project } from "@prisma/client";
 import { keystoneContext } from "../../keystone/context";
 import type { NextPageWithLayout } from "../_app";
 import { Home } from "@/components/home/Home";
+import { type DeserializedPage } from "@/keystone/types";
 
 export async function getStaticProps() {
   const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Home" },
     query: "id name headerText aboutText{ document }",
-  })) as Page;
+  })) as DeserializedPage;
   const projects = (await keystoneContext.query.Project.findMany({
     query: "id name description siteUrl, codeUrl shortDescription technologies",
   })) as Project[];
@@ -24,9 +20,6 @@ export async function getStaticProps() {
   };
 }
 
-//TODO: #4 Add technology icons based on selections from custom multi-select
-//TODO: #6 Update styles to accomodate for desktop
-//TODO: #7 Test styles on mobile
 const HomePage: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
 > = ({ page, projects }) => {

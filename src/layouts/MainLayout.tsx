@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 import { useDarkMode } from "usehooks-ts";
 
-type Props = {
+interface Props {
   children: React.ReactNode;
-};
+}
 
 const LIGHT_MODE = "emerald";
 const DARK_MODE = "forest";
@@ -26,7 +26,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
             <span className="text-primary">Adam</span> Slaker
           </a>
         </div>
-        <div className="flex-none">
+        <nav className="flex-none">
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link href="/home">Home</Link>
@@ -41,7 +41,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
               <Link href="/contact">Contact</Link>
             </li>
           </ul>
-        </div>
+        </nav>
         <label className="swap swap-rotate btn">
           {/* this hidden checkbox controls the state */}
           <input type="checkbox" checked={isDarkMode} onChange={toggle} />

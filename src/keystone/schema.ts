@@ -5,6 +5,7 @@ import {
   json,
   password,
   relationship,
+  select,
   text,
 } from "@keystone-6/core/fields";
 import { document } from "@keystone-6/fields-document";
@@ -72,6 +73,13 @@ export const lists = {
     },
     fields: {
       name: text({ validation: { isRequired: true } }),
+      projectType: select({
+        options: [
+          { label: "Professional Projects", value: "professional" },
+          { label: "Personal Projects", value: "personal" },
+          { label: "Digital Garden", value: "garden" },
+        ],
+      }),
       shortDescription: text({
         validation: { length: { max: 140 } },
         ui: {

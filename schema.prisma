@@ -34,6 +34,7 @@ model Post {
 model Project {
   id               String  @id @default(cuid())
   name             String  @default("")
+  projectType      String?
   shortDescription String  @default("")
   description      String  @default("")
   technologies     String? @default("[]")

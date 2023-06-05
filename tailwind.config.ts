@@ -1,6 +1,7 @@
+/** @type {import('tailwindcss').Config} */
 import { type Config } from "tailwindcss";
 
-module.exports = {
+const config = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
@@ -10,3 +11,5 @@ module.exports = {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 } satisfies Config;
+
+export default config;
