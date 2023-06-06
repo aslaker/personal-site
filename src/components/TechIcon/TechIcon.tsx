@@ -1,4 +1,3 @@
-import React from "react";
 import { DiReact } from "react-icons/di";
 import { GrGraphQl } from "react-icons/gr";
 

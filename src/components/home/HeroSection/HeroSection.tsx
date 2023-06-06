@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { RenderMarkup } from "../../common/RenderMarkup/RenderMarkup";
 import { type DocumentRendererProps } from "@keystone-6/document-renderer";
 

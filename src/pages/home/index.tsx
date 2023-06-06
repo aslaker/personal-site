@@ -6,14 +6,24 @@ import { keystoneContext } from "../../keystone/context";
 import type { NextPageWithLayout } from "../_app";
 import { Home } from "@/components/home/Home";
 import { type DeserializedPage } from "@/keystone/types";
+import { Octokit } from "octokit";
 
 export async function getStaticProps() {
+  const octokit = new Octokit({ auth: process.env.GITHUB_PAT });
+
+  const repoData = await octokit.request(
+    `GET https://api.github.com/repos/aslaker/personal-site/languages`
+  );
+
+  console.log({ repoData });
+
   const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Home" },
     query: "id name headerText aboutText{ document }",
   })) as DeserializedPage;
   const projects = (await keystoneContext.query.Project.findMany({
-    query: "id name description siteUrl, codeUrl shortDescription technologies",
+    query:
+      "id name description siteUrl, codeUrl shortDescription technologies projectType",
   })) as Project[];
   return {
     props: { page, projects },

@@ -42,7 +42,7 @@ const MainLayout: React.FC<Props> = ({ children }) => {
             </li>
           </ul>
         </nav>
-        <label className="swap swap-rotate btn">
+        <label className="swap-rotate swap btn">
           {/* this hidden checkbox controls the state */}
           <input type="checkbox" checked={isDarkMode} onChange={toggle} />
 

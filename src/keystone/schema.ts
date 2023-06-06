@@ -75,9 +75,9 @@ export const lists = {
       name: text({ validation: { isRequired: true } }),
       projectType: select({
         options: [
-          { label: "Professional Projects", value: "professional" },
-          { label: "Personal Projects", value: "personal" },
-          { label: "Digital Garden", value: "garden" },
+          { label: "Professional Projects", value: "professionalProjects" },
+          { label: "Personal Projects", value: "personalProjects" },
+          { label: "Digital Garden", value: "digitalGarden" },
         ],
       }),
       shortDescription: text({

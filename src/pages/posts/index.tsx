@@ -12,7 +12,7 @@ import type { NextPageWithLayout } from "../_app";
 export async function getStaticProps() {
   const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Blog" },
-    query: "name headerText aboutText",
+    query: "name headerText aboutText { document }",
   })) as Page;
   const posts = (await keystoneContext.query.Post.findMany({
     query: "id title slug",

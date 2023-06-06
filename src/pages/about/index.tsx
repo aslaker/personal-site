@@ -9,7 +9,7 @@ import type { NextPageWithLayout } from "../_app";
 export async function getStaticProps() {
   const page = (await keystoneContext.query.Page.findOne({
     where: { name: "About" },
-    query: "name headerText aboutText",
+    query: "name headerText aboutText{document}",
   })) as Page;
   return {
     props: { page },
