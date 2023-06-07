@@ -18,8 +18,8 @@ export const ProjectCard: React.FC<Props> = ({
   languages,
 }) => {
   return (
-    <div className="card w-1/2 bg-base-100 shadow-xl">
-      <div className="card-body bg-base-100">
+    <div className="card w-1/2 shadow-xl">
+      <div className="card-body">
         <h2 className="card-title">{name}</h2>
         <p>{description}</p>
         <div className="card-actions items-center justify-between">

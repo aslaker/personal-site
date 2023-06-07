@@ -50,7 +50,7 @@ export const ProjectsSection: React.FC<Props> = ({ projects }) => {
   const [activeTab, setActiveTab] = useState<ProjectType>("personalProjects");
 
   return (
-    <div className="flex min-h-screen w-full max-w-5xl flex-col">
+    <div className="flex min-h-screen w-full max-w-5xl flex-col gap-10">
       <div className="tabs tabs-boxed max-w-fit gap-7 self-center">
         {tabConfigs.map((tab) => (
           <a
@@ -71,6 +71,7 @@ export const ProjectsSection: React.FC<Props> = ({ projects }) => {
             key={project.id}
             className="flex odd:justify-end even:justify-start"
           >
+            <div className="divider" />
             <ProjectCard {...project} />
           </div>
         ))}
