@@ -39,7 +39,7 @@ model Project {
   description      String  @default("")
   technologies     String? @default("[]")
   siteUrl          String  @default("")
-  codeUrl          String  @default("")
+  githubRepo       String  @default("")
 }
 
 model Page {

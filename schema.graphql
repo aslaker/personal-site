@@ -197,7 +197,7 @@ type Project {
   description: String
   technologies: JSON
   siteUrl: String
-  codeUrl: String
+  githubRepo: String
 }
 
 input ProjectWhereUniqueInput {
@@ -214,7 +214,7 @@ input ProjectWhereInput {
   shortDescription: StringFilter
   description: StringFilter
   siteUrl: StringFilter
-  codeUrl: StringFilter
+  githubRepo: StringFilter
 }
 
 input StringNullableFilter {
@@ -238,7 +238,7 @@ input ProjectOrderByInput {
   shortDescription: OrderDirection
   description: OrderDirection
   siteUrl: OrderDirection
-  codeUrl: OrderDirection
+  githubRepo: OrderDirection
 }
 
 input ProjectUpdateInput {
@@ -248,7 +248,7 @@ input ProjectUpdateInput {
   description: String
   technologies: JSON
   siteUrl: String
-  codeUrl: String
+  githubRepo: String
 }
 
 input ProjectUpdateArgs {
@@ -263,7 +263,7 @@ input ProjectCreateInput {
   description: String
   technologies: JSON
   siteUrl: String
-  codeUrl: String
+  githubRepo: String
 }
 
 type Page {

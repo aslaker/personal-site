@@ -94,7 +94,7 @@ export const lists = {
       }),
       technologies: json({ defaultValue: [] }),
       siteUrl: text(),
-      codeUrl: text(),
+      githubRepo: text(),
     },
   }),
   Page: list({

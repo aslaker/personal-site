@@ -1,6 +1,7 @@
 import { type Project } from "@prisma/client";
 import { ProjectCard } from "./components/ProjectCard/ProjectCard";
 import { useState } from "react";
+import { type ProjectWithLanguages } from "../../../types/types";
 
 type ProjectType =
   | "professionalProjects"
@@ -32,7 +33,7 @@ const tabConfigs: TabConfig[] = [
 ];
 
 interface Props {
-  projects: Project[];
+  projects: ProjectWithLanguages[];
 }
 
 function checkProjectType({
@@ -40,7 +41,7 @@ function checkProjectType({
   project,
 }: {
   selectedTab: ProjectType;
-  project: Project;
+  project: ProjectWithLanguages;
 }): boolean {
   return selectedTab === project.projectType;
 }

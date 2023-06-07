@@ -1,11 +1,11 @@
-import { type Project } from "@prisma/client";
 import { type DeserializedPage } from "@/keystone/types";
 import { HeroSection } from "./HeroSection/HeroSection";
 import { ProjectsSection } from "./ProjectsSection/ProjectsSection";
+import { type ProjectWithLanguages } from "../../types/types";
 
 interface Props {
   pageData: DeserializedPage;
-  projects: Project[];
+  projects: ProjectWithLanguages[];
 }
 
 export const Home: React.FC<Props> = ({ pageData, projects }) => {
