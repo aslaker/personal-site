@@ -5,7 +5,7 @@ import type {
   NextPage,
 } from "next";
 import Link from "next/link";
-import type { Post } from "../../types/data.types";
+import type { Post } from "@prisma/client";
 import { keystoneContext } from "../../keystone/context";
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {

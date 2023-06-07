@@ -1,7 +1,7 @@
 import type { InferGetStaticPropsType, NextPage } from "next";
 import Link from "next/link";
 import Head from "next/head";
-import type { Page } from "../types/data.types";
+import type { Page } from "@prisma/client";
 import { keystoneContext } from "../keystone/context";
 
 export async function getStaticProps() {

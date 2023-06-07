@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import MainLayout from "../../layouts/MainLayout";
-import type { Page } from "../../types/data.types";
+import type { Page } from "@prisma/client";
 import type { InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { keystoneContext } from "../../keystone/context";

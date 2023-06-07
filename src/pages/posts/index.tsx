@@ -2,7 +2,7 @@ import type { InferGetStaticPropsType } from "next";
 import Link from "next/link";
 
 // Import the generated Lists API from Keystone
-import type { Page, Post } from "../../types/data.types";
+import type { Page, Post } from "@prisma/client";
 import type { ReactNode } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import Head from "next/head";
