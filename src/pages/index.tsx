@@ -1,45 +1,70 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
-import Link from "next/link";
-import Head from "next/head";
-import type { Page } from "@prisma/client";
+import type { ReactNode } from "react";
+import type { InferGetStaticPropsType } from "next";
+import MainLayout from "../layouts/MainLayout";
+import type { Project } from "@prisma/client";
 import { keystoneContext } from "../keystone/context";
+import type { NextPageWithLayout } from "./_app";
+import { Home } from "@/components/home/Home";
+import { type DeserializedPage } from "@/keystone/types";
+import { Octokit } from "octokit";
+import { type ProjectWithLanguages } from "../types/types";
+import Head from "next/head";
 
 export async function getStaticProps() {
+  const octokit = new Octokit({ auth: process.env.GITHUB_PAT });
+
   const page = (await keystoneContext.query.Page.findOne({
     where: { name: "Home" },
-    query: "name headerText aboutText{document}",
-  })) as Page;
+    query: "id name headerText aboutText{ document }",
+  })) as DeserializedPage;
+
+  const projects = (await keystoneContext.query.Project.findMany({
+    query:
+      "id name description siteUrl githubRepo shortDescription technologies projectType",
+  })) as Project[];
+
+  const projectLanguagePromises = projects.map(async (project) => {
+    if (!project.githubRepo) return;
+    const languageResponse = await octokit.request(
+      `GET https://api.github.com/repos/aslaker/${project.githubRepo}/languages`
+    );
+    return languageResponse.data as Record<string, number>;
+  });
+
+  const projectLanguages = await Promise.all(projectLanguagePromises);
+
+  const projectsWithLanguages: ProjectWithLanguages[] = projects.map(
+    (project, index) => {
+      return {
+        ...project,
+        languages: projectLanguages[index] ?? {},
+      };
+    }
+  );
+
   return {
-    props: { page },
+    props: { page, projects: projectsWithLanguages },
   };
 }
 
-const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  page,
-}) => {
+const HomePage: NextPageWithLayout<
+  InferGetStaticPropsType<typeof getStaticProps>
+> = ({ page, projects }) => {
   return (
     <>
       <Head>
-        <title>{page.name}</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+        />
       </Head>
-      <div className="flex min-h-screen flex-col items-end justify-center gap-12 bg-base-100 p-10">
-        <div className="flex flex-col items-end justify-start md:gap-4">
-          <h1 className="font-sans text-xl md:text-7xl">
-            Hi my name is{" "}
-            <span className="text-primary-400 font-bold">
-              <span className="text-primary">Adam</span> Slaker
-            </span>
-          </h1>
-          <span className="font-sans text-lg md:text-5xl">
-            I like to develop software.
-          </span>
-        </div>
-        <Link href="/home" className="btn-primary btn">
-          Enter
-        </Link>
-      </div>
+      <Home pageData={page} projects={projects} />
     </>
   );
 };
 
-export default Home;
+export default HomePage;
+
+HomePage.getLayout = function getLayout(page: ReactNode) {
+  return <MainLayout>{page}</MainLayout>;
+};
